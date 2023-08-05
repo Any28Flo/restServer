@@ -12,22 +12,23 @@ export class Server {
         this.app = express();
         this.port = process.env.PORT;
 
+        this.midlewares();
         this.routes();
 
     }
-    midlewares() {
+    private midlewares() {
         this.app.use(cors())
+
+        this.app.use(express.json())
     }
 
-    routes() {
+    private routes() {
 
         this.app.use('/api/users', usersRoutes)
-        this.app.use('/api', (req: Request, res: Response) => {
-            res.send('ok');
-        })
+
     }
 
-    start() {
+    public start() {
         this.app.listen(this.port, () => {
             console.log("app is running on port", this.port)
         })
