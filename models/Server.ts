@@ -1,4 +1,6 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
+
 require('dotenv').config()
 
 export class Server {
@@ -10,6 +12,9 @@ export class Server {
 
         this.routes();
 
+    }
+    midlewares() {
+        this.app.use(cors())
     }
     routes() {
         this.app.get('/', (req: Request, response: Response) => {
